@@ -1,77 +1,166 @@
+
 import json
 import os
 import pandas as pd
+
 from MLProcess.DrawPlot import DrawPlot
 from MLProcess.Predict import Predict
 from MLProcess.PycaretWrapper import PycaretWrapper
 from MLProcess.Scoring import Scoring
 from userPackage.LoadDataset import LoadDataset
-from userPackage.Package_CheckData import CheckData
 from userPackage.Package_Encode import EncodeAllFeatures
 
-MODEL_FOLDER_MAP = {
-    "gbc": "gbc",
-    "et": "et",
-    "catboost": "catboost",
-    "dt": "dt",
-    "ada": "ada",
+
+# ==========================================
+# 1. 模型設定
+# ==========================================
+# key：程式內部使用的模型名稱
+# folder：模型及參數所在資料夾
+# file：傳給 PycaretWrapper 的模型名稱
+MODEL_CONFIG = {
+    "gbc": {
+        "folder": "GBC",
+        "file": "gbc",
+    },
+    "et": {
+        "folder": "ET",
+        "file": "et",
+    },
+    "catboost": {
+        "folder": "CB",
+        "file": "catboost",
+    },
+    "dt": {
+        "folder": "DT",
+        "file": "dt",
+    },
+    "ada": {
+        "folder": "AB",
+        "file": "ada",
+    },
 }
 
-modelCutoffMap = {
-    "ada": "bestCutoff_ada.json",
-    "catboost": "bestCutoff_cb.json",
-    "dt": "bestCutoff_dt.json",
-    "et": "bestCutoff_et.json",
-    "gbc": "bestCutoff_gbc.json",
-}
+modelNameList = list(MODEL_CONFIG.keys())
 
-modelNameList = list(MODEL_FOLDER_MAP.keys())
 
+# ==========================================
+# 2. 基本設定與路徑
+# ==========================================
 normalizeMethod = "Standard"
 featureNum = 70
 dataName = "AIP2025"
 
-baseParamPath = f"../data/param/{normalizeMethod}/"
+baseParamPath = "../data/param/"
 baseModelPath = "../data/finalModel/"
 mlDataPath = "../data/mlData/"
+featureStatPath = "../data/featureStat/"
 mlScorePath = "../data/mlScore/"
 
 os.makedirs(mlScorePath, exist_ok=True)
 
-refParamPath = f"{baseParamPath}ada/"
+# 使用 ET 資料夾的前處理參數。
+# 只有在五個模型原本共用相同前處理設定時，這樣才適用。
+refParamPath = os.path.join(baseParamPath, "ET")
 
+featureTypeDictPath = os.path.join(
+    refParamPath,
+    f"{dataName}_featureTypeDict.json",
+)
+
+scalerPath = os.path.join(
+    refParamPath,
+    f"{dataName}_{normalizeMethod}Scaler.pkl",
+)
+
+
+# ==========================================
+# 3. 檢查必要檔案
+# ==========================================
+requiredFiles = [
+    featureTypeDictPath,
+    scalerPath,
+    os.path.join(mlDataPath, "Boruta-featureRank-XGB.csv"),
+    "../data/dataset/DS_Test1_neg.fasta",
+    "../data/dataset/DS_Test1_pos.fasta",
+]
+
+for filePath in requiredFiles:
+    if not os.path.isfile(filePath):
+        raise FileNotFoundError(
+            f"找不到必要檔案：{filePath}"
+        )
+
+for modelName, config in MODEL_CONFIG.items():
+    folderName = config["folder"]
+
+    modelDir = os.path.join(baseModelPath, folderName)
+    cutoffPath = os.path.join(
+        baseParamPath,
+        folderName,
+        f"bestCutoff_{folderName}.json",
+    )
+
+    if not os.path.isdir(modelDir):
+        raise FileNotFoundError(
+            f"找不到模型資料夾：{modelDir}"
+        )
+
+    if not os.path.isfile(cutoffPath):
+        raise FileNotFoundError(
+            f"找不到模型 cutoff 檔案：{cutoffPath}"
+        )
+
+
+# ==========================================
+# 4. 特徵編碼與標準化
+# ==========================================
 ldObj = LoadDataset(minSeqLength=5)
+
 indpNegPath = "../data/dataset/DS_Test2_neg.fasta"
 indpPosPath = "../data/dataset/DS_Test2_pos.fasta"
 
 indpNegSeqDict = ldObj.readFasta(indpNegPath)
 indpPosSeqDict = ldObj.readFasta(indpPosPath)
-testDict = {0: indpNegSeqDict, 1: indpPosSeqDict, -1: None}
+
+testDict = {
+    0: indpNegSeqDict,
+    1: indpPosSeqDict,
+    -1: None,
+}
 
 encodeObj = EncodeAllFeatures()
+
 encodeObj.dataEncodeSetup(
     saveFeatureDict=None,
     saveJsonPath=None,
-    loadJsonPath=refParamPath + f"{dataName}_featureTypeDict.json",
+    loadJsonPath=featureTypeDictPath,
     b_loadJson=True,
 )
-encodeIndpDf = encodeObj.dataEncodeOutPut(dataDict=testDict)
+
+encodeIndpDf = encodeObj.dataEncodeOutPut(
+    dataDict=testDict
+)
 
 indpNmlzDf = encodeObj.dataNormalization(
     encodeIndpDf=encodeIndpDf,
-    normalization=normalizeMethod.lower(),
-    loadNmlzScalerPklPath=refParamPath + f"{dataName}_{normalizeMethod.lower()}Scaler.pkl",
+    normalization=normalizeMethod,
+    loadNmlzScalerPklPath=scalerPath,
     b_loadPkl=True,
 )
 
 skipFeatureList = [
-    s for s in indpNmlzDf.columns if "MotifBitVec" in s
+    column
+    for column in indpNmlzDf.columns
+    if "MotifBitVec" in column
 ]
 
 brtObj = encodeObj.dataBoruta(
     trainDf=None,
     runBoruta=False,
-    featRankPath=mlDataPath + "Boruta-featureRank-XGB.csv",
+    featRankPath=os.path.join(
+        mlDataPath,
+        "Boruta-featureRank-XGB.csv",
+    ),
     skipFeatureList=skipFeatureList,
 )
 
@@ -82,43 +171,206 @@ encodeObj.dataDecidedFeatureNum(
     brtObj=brtObj,
 )
 
+print("特徵編碼與篩選完成！")
+
+
+# ==========================================
+# 5. 讀取測試資料
+# ==========================================
 pycObj = PycaretWrapper()
 setupDf = pycObj.doSetup(needTrain=False)
 
-dataIndpDf = pd.read_csv(
-    mlDataPath + f"/indp_F{featureNum}.csv", index_col=[0]
+indpCsvPath = os.path.join(
+    mlDataPath,
+    f"indp_F{featureNum}.csv",
 )
-dataIndp_X = dataIndpDf.drop(["y"], axis=1)
+
+if not os.path.isfile(indpCsvPath):
+    raise FileNotFoundError(
+        f"找不到特徵 CSV：{indpCsvPath}"
+    )
+
+dataIndpDf = pd.read_csv(
+    indpCsvPath,
+    index_col=0,
+)
+
+if "y" not in dataIndpDf.columns:
+    raise KeyError(
+        f"{indpCsvPath} 缺少目標欄位 y"
+    )
+
+dataIndp_X = dataIndpDf.drop(columns=["y"])
 dataIndp_y = dataIndpDf[["y"]]
 
-finalModelList = pycObj.doLoadModel(
-    path=baseModelPath,
-    fileNameList=modelNameList,
-    b_isFinalizedModel=True
+
+# ==========================================
+# 6. 載入五個最佳模型
+# ==========================================
+finalModelList = []
+
+for modelName in modelNameList:
+    config = MODEL_CONFIG[modelName]
+
+    modelDir = os.path.join(
+        baseModelPath,
+        config["folder"],
+    )
+
+    loadedModels = pycObj.doLoadModel(
+        path=modelDir,
+        fileNameList=[config["file"]],
+        b_isFinalizedModel=True,
+    )
+
+    if not loadedModels:
+        raise RuntimeError(
+            f"無法載入模型：{modelName}，路徑：{modelDir}"
+        )
+
+    finalModelList.append(loadedModels[0])
+
+    print(
+        f"成功載入模型：{modelName} "
+        f"(資料夾：{config['folder']})"
+    )
+
+
+# ==========================================
+# 7. 預測
+# ==========================================
+predObjIndp = Predict(
+    dataX=dataIndp_X,
+    modelList=finalModelList,
 )
 
-predObjIndp = Predict(dataX=dataIndp_X, modelList=finalModelList)
-predVectorListIndp, probVectorListIndp = predObjIndp.doPredict()
+predVectorListIndp, probVectorListIndp = (
+    predObjIndp.doPredict()
+)
+
+if len(predVectorListIndp) != len(modelNameList):
+    raise ValueError(
+        "預測模型數量與 modelNameList 不一致。"
+    )
+
+if len(probVectorListIndp) != len(modelNameList):
+    raise ValueError(
+        "機率預測數量與 modelNameList 不一致。"
+    )
 
 predVectorDf = pd.DataFrame(
-    predVectorListIndp, index=modelNameList, columns=dataIndpDf.index
+    predVectorListIndp,
+    index=modelNameList,
+    columns=dataIndpDf.index,
 ).T
+
 probVectorDf = pd.DataFrame(
-    probVectorListIndp, index=modelNameList, columns=dataIndpDf.index
+    probVectorListIndp,
+    index=modelNameList,
+    columns=dataIndpDf.index,
 ).T
 
-predVectorDf.to_csv(mlScorePath + "predVector.csv")
-probVectorDf.to_csv(mlScorePath + "probVector.csv")
+predVectorDf.to_csv(
+    os.path.join(mlScorePath, "predVector.csv")
+)
 
-def doScoring(
-        predVectorListIndp,
-        probVectorListIndp,
-        dataIndp_y,
-        modelNameList,
-        finalModelList,
-        model_folder_map,
-        baseParamPath,
-        mlScorePath,
+probVectorDf.to_csv(
+    os.path.join(mlScorePath, "probVector.csv")
+)
+
+print("五個模型的預測完成！")
+
+
+# ==========================================
+# 8. 載入各模型 cutoff
+# ==========================================
+def loadModelCutoffs(modelNameList, modelConfig, baseParamPath):
+    """
+    讀取每個模型各自的 cutoff JSON。
+
+    注意：
+    這裡假設 JSON 最外層是字典，
+    且包含模型名稱、資料夾名稱或模型檔名作為 key。
+    若實際 JSON 格式不同，需依照內容調整。
+    """
+    combinedCutoffDict = {}
+
+    for modelName in modelNameList:
+        config = modelConfig[modelName]
+        folderName = config["folder"]
+
+        cutoffPath = os.path.join(
+            baseParamPath,
+            folderName,
+            f"bestCutoff_{folderName}.json",
+        )
+
+        with open(
+            cutoffPath,
+            "r",
+            encoding="utf-8",
+        ) as file:
+            cutoffData = json.load(file)
+
+        if not isinstance(cutoffData, dict):
+            raise TypeError(
+                f"Cutoff JSON 格式不是字典：{cutoffPath}"
+            )
+
+        possibleKeys = [
+            modelName,
+            folderName,
+            config["file"],
+        ]
+
+        matchedKey = next(
+            (
+                key
+                for key in possibleKeys
+                if key in cutoffData
+            ),
+            None,
+        )
+
+        if matchedKey is None:
+            raise KeyError(
+                f"{cutoffPath} 找不到模型 {modelName} 的 cutoff。"
+                f"JSON keys：{list(cutoffData.keys())}"
+            )
+
+        cutoffValue = cutoffData[matchedKey]
+
+        if not isinstance(cutoffValue, (int, float)):
+            raise TypeError(
+                f"{cutoffPath} 的 cutoff 不是數值：{cutoffValue}"
+            )
+
+        if not 0 <= cutoffValue <= 1:
+            raise ValueError(
+                f"{cutoffPath} 的 cutoff 超出 [0, 1]：{cutoffValue}"
+            )
+
+        combinedCutoffDict[modelName] = cutoffValue
+
+        print(
+            f"載入 cutoff：{modelName} = {cutoffValue}"
+        )
+
+    return combinedCutoffDict
+
+
+# ==========================================
+# 9. 評分與 ROC 繪圖
+# ==========================================
+def doScoringSelectedModels(
+    predVectorListIndp,
+    probVectorListIndp,
+    dataIndp_y,
+    modelNameList,
+    finalModelList,
+    modelConfig,
+    baseParamPath,
+    mlScorePath,
 ):
     scoreObjIndp = Scoring(
         predVectorList=predVectorListIndp,
@@ -127,20 +379,39 @@ def doScoring(
         modelNameList=modelNameList,
     )
 
-    for model_name in modelNameList:
-        folder_name = model_folder_map[model_name]
-        cutoff_file = modelCutoffMap[model_name]
-        cutoff_path = f"{baseParamPath}{folder_name}/{cutoff_file}"
+    combinedCutoffDict = loadModelCutoffs(
+        modelNameList=modelNameList,
+        modelConfig=modelConfig,
+        baseParamPath=baseParamPath,
+    )
 
-        if os.path.exists(cutoff_path):
-            scoreObjIndp.loadCutoff(cutoff_path)
-        else:
-            print(f"[Warning] Cutoff file not found: {cutoff_path}")
+    mergedCutoffPath = os.path.join(
+        mlScorePath,
+        "merged_bestCutoff.json",
+    )
+
+    with open(
+        mergedCutoffPath,
+        "w",
+        encoding="utf-8",
+    ) as file:
+        json.dump(
+            combinedCutoffDict,
+            file,
+            ensure_ascii=False,
+            indent=4,
+        )
+
+    # 使用各模型的最佳 cutoff 產生二元預測
+    scoreObjIndp.loadCutoff(mergedCutoffPath)
 
     scoreDfIndp = scoreObjIndp.doScoring(
         b_optimizedMcc=True,
         sortColumn="mcc",
-        path=mlScorePath + "singleModelScore.csv",
+        path=os.path.join(
+            mlScorePath,
+            "singleModelScore.csv",
+        ),
     )
 
     drawObj = DrawPlot(
@@ -151,11 +422,14 @@ def doScoring(
         probArrList=probVectorListIndp,
     )
 
-    aucDf = drawObj.drawROC(
+    drawObj.drawROC(
         colorList=None,
         title=False,
         save=True,
-        saveLoc=mlScorePath + "singleModelIndeROC.png",
+        saveLoc=os.path.join(
+            mlScorePath,
+            "singleModelIndeROC.png",
+        ),
         show=True,
         dpi=300,
         figSize=(12, 9),
@@ -165,13 +439,17 @@ def doScoring(
     return scoreDfIndp
 
 
-scoreDfIndp = doScoring(
-    predVectorListIndp,
-    probVectorListIndp,
-    dataIndp_y,
-    modelNameList,
-    finalModelList,
-    model_folder_map=MODEL_FOLDER_MAP,
+scoreDfIndp = doScoringSelectedModels(
+    predVectorListIndp=predVectorListIndp,
+    probVectorListIndp=probVectorListIndp,
+    dataIndp_y=dataIndp_y,
+    modelNameList=modelNameList,
+    finalModelList=finalModelList,
+    modelConfig=MODEL_CONFIG,
     baseParamPath=baseParamPath,
     mlScorePath=mlScorePath,
+)
+
+print(
+    "五個最佳模型評估與 ROC 繪圖完成！"
 )

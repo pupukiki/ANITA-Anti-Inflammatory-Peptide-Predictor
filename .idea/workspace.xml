@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7687a0f5-3f1b-41cd-9583-a4048caedad3" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2SnD1Z3S9SfGufdB0fMbykrvufM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.2 (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.FastaTanslator.executor&quot;: &quot;Run&quot;,
+    &quot;Python.PackageSHAP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Package_Encode.executor&quot;: &quot;Run&quot;,
+    &quot;Python.PepPropertyAnalysis_v2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Visualization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_Feature_v2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_ML.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_predict.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plotPredConfidence.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PILab/peptideML_v2_0714-AIP&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Python.main_predict">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="peptideML_v2_0714" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="peptideML_v2_0714" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tool" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tool/1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="peptideML_v2_0714" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tool" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tool/2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="peptideML_v2_0714" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tool/catboost_info" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tool/catboost_info/2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PepPropertyAnalysis_v2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="peptideML_v2_0714" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tool" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tool/PepPropertyAnalysis_v2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="peptideML_v2_0714" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_predict" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="peptideML_v2_0714" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mainProgram" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainProgram/main_predict.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main_predict" />
+        <item itemvalue="Python.2 (1)" />
+        <item itemvalue="Python.2" />
+        <item itemvalue="Python.PepPropertyAnalysis_v2" />
+        <item itemvalue="Python.1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7687a0f5-3f1b-41cd-9583-a4048caedad3" name="Changes" comment="" />
+      <created>1689773239884</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1689773239884</updated>
+      <workItem from="1689773241223" duration="101000" />
+      <workItem from="1689773439476" duration="601000" />
+      <workItem from="1690625147333" duration="141000" />
+      <workItem from="1690625352983" duration="206000" />
+      <workItem from="1690790841002" duration="14000" />
+      <workItem from="1691397359305" duration="53000" />
+      <workItem from="1692111933383" duration="31000" />
+      <workItem from="1692199068815" duration="852000" />
+      <workItem from="1694065824903" duration="782000" />
+      <workItem from="1694154781521" duration="37000" />
+      <workItem from="1698992812916" duration="2221000" />
+      <workItem from="1699080742427" duration="7661000" />
+      <workItem from="1699098403781" duration="3168000" />
+      <workItem from="1699104707500" duration="3582000" />
+      <workItem from="1699168276333" duration="1776000" />
+      <workItem from="1699273258635" duration="117000" />
+      <workItem from="1699704962475" duration="3625000" />
+      <workItem from="1699709441457" duration="3727000" />
+      <workItem from="1699867296649" duration="651000" />
+      <workItem from="1699884848486" duration="3846000" />
+      <workItem from="1699889846363" duration="4665000" />
+      <workItem from="1699927887303" duration="315000" />
+      <workItem from="1700015908720" duration="1754000" />
+      <workItem from="1700049362757" duration="3185000" />
+      <workItem from="1700054992891" duration="26828000" />
+      <workItem from="1700161593309" duration="1751000" />
+      <workItem from="1700188727537" duration="11589000" />
+      <workItem from="1700308914598" duration="35085000" />
+      <workItem from="1700532813983" duration="41759000" />
+      <workItem from="1700721182967" duration="42433000" />
+      <workItem from="1701014350077" duration="32004000" />
+      <workItem from="1701096443954" duration="1223000" />
+      <workItem from="1701137337622" duration="1600000" />
+      <workItem from="1701141915344" duration="14775000" />
+      <workItem from="1701251333449" duration="2271000" />
+      <workItem from="1701264339931" duration="2206000" />
+      <workItem from="1701268256849" duration="31000" />
+      <workItem from="1701268395121" duration="1867000" />
+      <workItem from="1701421339774" duration="4214000" />
+      <workItem from="1701442634456" duration="1708000" />
+      <workItem from="1701784554000" duration="563000" />
+      <workItem from="1702647299845" duration="3000" />
+      <workItem from="1702647453342" duration="1365000" />
+      <workItem from="1705568585930" duration="190000" />
+      <workItem from="1708352213573" duration="4584000" />
+      <workItem from="1708434541755" duration="3794000" />
+      <workItem from="1708525232496" duration="4067000" />
+      <workItem from="1708593513130" duration="4714000" />
+      <workItem from="1708675888552" duration="3965000" />
+      <workItem from="1708952211514" duration="20983000" />
+      <workItem from="1709532455767" duration="4476000" />
+      <workItem from="1709602347252" duration="688000" />
+      <workItem from="1709641607179" duration="5518000" />
+      <workItem from="1709735462377" duration="596000" />
+      <workItem from="1709789937963" duration="611000" />
+      <workItem from="1709806599580" duration="2042000" />
+      <workItem from="1710158787915" duration="1438000" />
+      <workItem from="1710160682166" duration="696000" />
+      <workItem from="1710931841434" duration="596000" />
+      <workItem from="1711036654329" duration="6153000" />
+      <workItem from="1711360742722" duration="135000" />
+      <workItem from="1711422127779" duration="1855000" />
+      <workItem from="1714026759459" duration="123000" />
+      <workItem from="1714062590521" duration="115000" />
+      <workItem from="1724077309349" duration="26688000" />
+      <workItem from="1725294283333" duration="6149000" />
+      <workItem from="1725451465472" duration="3124000" />
+      <workItem from="1725515866753" duration="11857000" />
+      <workItem from="1726215583464" duration="1335000" />
+      <workItem from="1726709600246" duration="2761000" />
+      <workItem from="1726756496593" duration="4662000" />
+      <workItem from="1727429219557" duration="222000" />
+      <workItem from="1727432107217" duration="1504000" />
+      <workItem from="1727545726059" duration="330000" />
+      <workItem from="1727548680653" duration="5066000" />
+      <workItem from="1727687376580" duration="311000" />
+      <workItem from="1727976564455" duration="1321000" />
+      <workItem from="1728730245103" duration="30000" />
+      <workItem from="1729243836247" duration="212000" />
+      <workItem from="1729600747691" duration="141000" />
+      <workItem from="1729761505800" duration="116000" />
+      <workItem from="1729858765813" duration="599000" />
+      <workItem from="1729936808480" duration="28000" />
+      <workItem from="1730126257241" duration="3000" />
+      <workItem from="1730128746142" duration="4000" />
+      <workItem from="1730202116228" duration="6773000" />
+      <workItem from="1730708688734" duration="15000" />
+      <workItem from="1730783963933" duration="12000" />
+      <workItem from="1730872809976" duration="14000" />
+      <workItem from="1731071585534" duration="610000" />
+      <workItem from="1731250998900" duration="68000" />
+      <workItem from="1731408121495" duration="1000" />
+      <workItem from="1731596277367" duration="1287000" />
+      <workItem from="1731597656118" duration="883000" />
+      <workItem from="1731635845055" duration="47000" />
+      <workItem from="1731922287998" duration="8000" />
+      <workItem from="1733322699542" duration="169000" />
+      <workItem from="1733413815082" duration="673000" />
+      <workItem from="1735458552142" duration="22000" />
+      <workItem from="1735550192018" duration="3245000" />
+      <workItem from="1736605032935" duration="616000" />
+      <workItem from="1741032084570" duration="1877000" />
+      <workItem from="1742144855272" duration="757000" />
+      <workItem from="1743866399593" duration="1828000" />
+      <workItem from="1745558915677" duration="1397000" />
+      <workItem from="1746372834755" duration="46000" />
+      <workItem from="1746970807152" duration="354000" />
+      <workItem from="1747302130272" duration="4802000" />
+      <workItem from="1747418928709" duration="731000" />
+      <workItem from="1747913212305" duration="2338000" />
+      <workItem from="1748188178595" duration="1223000" />
+      <workItem from="1748584048796" duration="592000" />
+      <workItem from="1749232681467" duration="2922000" />
+      <workItem from="1749800492266" duration="1167000" />
+      <workItem from="1750859189186" duration="601000" />
+      <workItem from="1751893889602" duration="18000" />
+      <workItem from="1752443274394" duration="107000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MLProcess/Scoring.py</url>
+          <line>124</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tool/PepPropertyAnalysis_test.py</url>
+          <line>138</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$main_Feature_v2.coverage" NAME="main_Feature_v2 Coverage Results" MODIFIED="1731598042677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mainProgram" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$PepPropertyAnalysis_test.coverage" NAME="PepPropertyAnalysis_test Coverage Results" MODIFIED="1701443922481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$FeatureStat.coverage" NAME="FeatureStat Coverage Results" MODIFIED="1699705545908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/userPackage" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$test_2.coverage" NAME="test 2 Coverage Results" MODIFIED="1700208547074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mainProgram" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$Visualization.coverage" NAME="Visualization Coverage Results" MODIFIED="1709478135097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$test.coverage" NAME="test Coverage Results" MODIFIED="1701023383865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mainProgram" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$main_ML.coverage" NAME="main_ML Coverage Results" MODIFIED="1701443351113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mainProgram" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$_base.coverage" NAME="_base Coverage Results" MODIFIED="1701035845310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/anaconda3/envs/pycaret/Lib/site-packages/matplotlib/axes" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$PepPropertyAnalysis.coverage" NAME="PepPropertyAnalysis Coverage Results" MODIFIED="1701267988019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tool" />
+    <SUITE FILE_PATH="coverage/PackageiFeature_py$main_predict.coverage" NAME="main_predict Coverage Results" MODIFIED="1699101791405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mainProgram" />
+  </component>
+</project>
