@@ -10,13 +10,6 @@ from MLProcess.Scoring import Scoring
 from userPackage.LoadDataset import LoadDataset
 from userPackage.Package_Encode import EncodeAllFeatures
 
-
-# ==========================================
-# 1. 模型設定
-# ==========================================
-# key：程式內部使用的模型名稱
-# folder：模型及參數所在資料夾
-# file：傳給 PycaretWrapper 的模型名稱
 MODEL_CONFIG = {
     "gbc": {
         "folder": "GBC",
@@ -42,10 +35,6 @@ MODEL_CONFIG = {
 
 modelNameList = list(MODEL_CONFIG.keys())
 
-
-# ==========================================
-# 2. 基本設定與路徑
-# ==========================================
 normalizeMethod = "Standard"
 featureNum = 70
 dataName = "AIP2025"
@@ -72,10 +61,6 @@ scalerPath = os.path.join(
     f"{dataName}_{normalizeMethod}Scaler.pkl",
 )
 
-
-# ==========================================
-# 3. 檢查必要檔案
-# ==========================================
 requiredFiles = [
     featureTypeDictPath,
     scalerPath,
@@ -109,11 +94,6 @@ for modelName, config in MODEL_CONFIG.items():
         raise FileNotFoundError(
             f"找不到模型 cutoff 檔案：{cutoffPath}"
         )
-
-
-# ==========================================
-# 4. 特徵編碼與標準化
-# ==========================================
 ldObj = LoadDataset(minSeqLength=5)
 
 indpNegPath = "../data/dataset/DS_Test2_neg.fasta"
@@ -171,12 +151,6 @@ encodeObj.dataDecidedFeatureNum(
     brtObj=brtObj,
 )
 
-print("特徵編碼與篩選完成！")
-
-
-# ==========================================
-# 5. 讀取測試資料
-# ==========================================
 pycObj = PycaretWrapper()
 setupDf = pycObj.doSetup(needTrain=False)
 
@@ -203,10 +177,6 @@ if "y" not in dataIndpDf.columns:
 dataIndp_X = dataIndpDf.drop(columns=["y"])
 dataIndp_y = dataIndpDf[["y"]]
 
-
-# ==========================================
-# 6. 載入五個最佳模型
-# ==========================================
 finalModelList = []
 
 for modelName in modelNameList:
@@ -230,15 +200,6 @@ for modelName in modelNameList:
 
     finalModelList.append(loadedModels[0])
 
-    print(
-        f"成功載入模型：{modelName} "
-        f"(資料夾：{config['folder']})"
-    )
-
-
-# ==========================================
-# 7. 預測
-# ==========================================
 predObjIndp = Predict(
     dataX=dataIndp_X,
     modelList=finalModelList,
@@ -277,22 +238,7 @@ predVectorDf.to_csv(
 probVectorDf.to_csv(
     os.path.join(mlScorePath, "probVector.csv")
 )
-
-print("五個模型的預測完成！")
-
-
-# ==========================================
-# 8. 載入各模型 cutoff
-# ==========================================
 def loadModelCutoffs(modelNameList, modelConfig, baseParamPath):
-    """
-    讀取每個模型各自的 cutoff JSON。
-
-    注意：
-    這裡假設 JSON 最外層是字典，
-    且包含模型名稱、資料夾名稱或模型檔名作為 key。
-    若實際 JSON 格式不同，需依照內容調整。
-    """
     combinedCutoffDict = {}
 
     for modelName in modelNameList:
@@ -357,11 +303,6 @@ def loadModelCutoffs(modelNameList, modelConfig, baseParamPath):
         )
 
     return combinedCutoffDict
-
-
-# ==========================================
-# 9. 評分與 ROC 繪圖
-# ==========================================
 def doScoringSelectedModels(
     predVectorListIndp,
     probVectorListIndp,
@@ -378,18 +319,15 @@ def doScoringSelectedModels(
         answerDf=dataIndp_y,
         modelNameList=modelNameList,
     )
-
     combinedCutoffDict = loadModelCutoffs(
         modelNameList=modelNameList,
         modelConfig=modelConfig,
         baseParamPath=baseParamPath,
     )
-
     mergedCutoffPath = os.path.join(
         mlScorePath,
         "merged_bestCutoff.json",
     )
-
     with open(
         mergedCutoffPath,
         "w",
@@ -401,10 +339,7 @@ def doScoringSelectedModels(
             ensure_ascii=False,
             indent=4,
         )
-
-    # 使用各模型的最佳 cutoff 產生二元預測
     scoreObjIndp.loadCutoff(mergedCutoffPath)
-
     scoreDfIndp = scoreObjIndp.doScoring(
         b_optimizedMcc=True,
         sortColumn="mcc",
@@ -413,7 +348,6 @@ def doScoringSelectedModels(
             "singleModelScore.csv",
         ),
     )
-
     drawObj = DrawPlot(
         answerDf=dataIndp_y,
         modelList=finalModelList,
@@ -421,7 +355,6 @@ def doScoringSelectedModels(
         predArrList=predVectorListIndp,
         probArrList=probVectorListIndp,
     )
-
     drawObj.drawROC(
         colorList=None,
         title=False,
@@ -435,10 +368,7 @@ def doScoringSelectedModels(
         figSize=(12, 9),
         topNum=len(modelNameList),
     )
-
     return scoreDfIndp
-
-
 scoreDfIndp = doScoringSelectedModels(
     predVectorListIndp=predVectorListIndp,
     probVectorListIndp=probVectorListIndp,
@@ -448,8 +378,4 @@ scoreDfIndp = doScoringSelectedModels(
     modelConfig=MODEL_CONFIG,
     baseParamPath=baseParamPath,
     mlScorePath=mlScorePath,
-)
-
-print(
-    "五個最佳模型評估與 ROC 繪圖完成！"
 )
